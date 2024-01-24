@@ -23,13 +23,86 @@
             <GroupBox Header="Список клиентов"
                       MinHeight="150">
                 <ListBox ItemsSource="{Binding ClientsList}"
+                         SelectedItem="{Binding SelectedClient}"
                          DisplayMemberPath="Name"/>
             </GroupBox>
 
-            <Button Content="Добавить клиента"/>
             
             
+        </StackPanel>
 
+        <StackPanel Grid.Column="1"
+                    Orientation="Vertical">
+
+            <GroupBox Header="Информация по счетам"
+                      MinHeight="120">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                Orientation="Vertical">
+
+                        <ListView ItemsSource="{Binding DepositAccountList}"
+                                  SelectedItem="{Binding SelectedDepositAccount}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Header="Тип">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Type}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Баланс">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Amount}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical">
+
+                        <ListView ItemsSource="{Binding NonDepositAccountList}"
+                                  SelectedItem="{Binding SelectedNonDepositAccount}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Header="Тип">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Type}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Баланс">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Amount}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+            
         </StackPanel>
         
     </Grid>
