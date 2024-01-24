@@ -1,4 +1,6 @@
-﻿namespace Module_12_1.Models
+﻿using System.Collections.Generic;
+
+namespace Module_12_1.Models
 {
     public class Account<T> : IAccount<T>
     {
@@ -18,18 +20,23 @@
             }
         }
 
+        public List<IAccount> Accounts { get; set; }
+
+
         public Account(T accountType, decimal amount)
         {
             AccountType = accountType;
             Amount = amount;
         }
 
-        //public void TopUp<T>(Client selectedClient, IAccount<T> account, decimal amount)
-        //{
-        //    if (account is DepositAccount) selectedClient.DepositAccount.Amount += amount;
-        //    else if (account is NonDepositAccount) selectedClient.NonDepositAccount.Amount += amount;
-        //    else return;
-        //}
+        public void TopUp<K>(decimal amount)
+        {
+            Amount += amount;
+        }
 
+        public void TopUp<K>(IAccount<K> account, decimal amount)
+        {
+            account.Amount += amount;
+        }
     }
 }
