@@ -39,14 +39,14 @@
 
 
                 <ListView ItemsSource="{Binding SelectedClient.AccountsList}"
-                                  SelectedItem="{Binding SelectedAccount}">
+                          SelectedItem="{Binding SelectedAccount}">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
                                 <GridViewColumn Header="Тип" Width="120">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Type}"/>
+                                            <TextBlock Text="{Binding Name}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -70,11 +70,36 @@
 
                     <TextBlock Text="Выберите счёт:"/>
                     <ComboBox ItemsSource="{Binding SelectedClient.AccountsList}"
-                              SelectedItem="{Binding SelectedAccount}"/>
+                              SelectedItem="{Binding TopUpAccount}"
+                              DisplayMemberPath="Name"/>
                     <TextBlock Text="Сумма пополнения:"/>
                     <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Content="Пополнить"
                             Command="{Binding TopUpBalanceCommand}"/>
+                </StackPanel>
+                
+            </GroupBox>
+
+            <GroupBox Header="Перевод между клиентами">
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock Text="Получатель:"/>
+                    <ComboBox ItemsSource="{Binding ClientsList}"
+                              SelectedItem="{Binding DestinationClient, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="Name"/>
+                    <TextBlock Text="Счет списания:"/>
+                    <ComboBox ItemsSource="{Binding SelectedClient.AccountsList}"
+                              SelectedItem="{Binding SelectedAccount, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="Name"/>
+                    <TextBlock Text="Счет пополнения:"/>
+                    <ComboBox ItemsSource="{Binding DestinationClient.AccountsList}"
+                              SelectedItem="{Binding DestinationAccount, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="Name"/>
+                    <TextBlock Text="Сумма перевода:"/>
+                    <TextBox Text="{Binding TransferAmount, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Перевести"
+                            Command="{Binding TransferCommand}"/>
                 </StackPanel>
                 
             </GroupBox>
