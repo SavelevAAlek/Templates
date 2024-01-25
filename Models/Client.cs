@@ -2,30 +2,15 @@
 
 namespace Module_12_1.Models
 {
-    public class Client : IAccount
+    public class Client 
     {
         public string Name { get; set; }
-        public IAccount<DepositAccount> DepositAccount { get; set; }
-        public IAccount<NonDepositAccount> NonDepositAccount { get; set; }
-
-        public List<IAccount> Accounts { get; set; }
-
-        public Client(string name, IAccount<DepositAccount> depositAccount, IAccount<NonDepositAccount> nonDepositAccount)
+        public List<IAccount<object>> AccountsList { get; set; }
+        public Client(string name, Account<DepositAccount> depositAccount, Account<NonDepositAccount> nonDepositAccount)
         {
             Name = name;
-            DepositAccount = depositAccount;
-            NonDepositAccount = nonDepositAccount;
-
-            Accounts = new List<IAccount>
-            {
-                DepositAccount,
-                NonDepositAccount
-            };
+            AccountsList = new List<IAccount<object>>() { depositAccount, nonDepositAccount };
         }
 
-        public void TopUp<T>(IAccount<T> account, decimal amount)
-        {
-            account.Amount += amount;
-        }
     }
 }

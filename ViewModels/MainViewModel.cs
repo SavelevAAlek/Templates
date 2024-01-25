@@ -12,12 +12,12 @@ namespace Module_12_1.ViewModels
         private ObservableCollection<Client> _clientsList;
         private Client _selectedClient;
         private decimal _amount;
-        private IAccount _selectedAccount;
+        private IAccount<object> _selectedAccount;
 
         public ObservableCollection<Client> ClientsList { get => _clientsList; set => SetProperty(ref _clientsList, value); }
         public Client SelectedClient { get => _selectedClient; set => SetProperty(ref _selectedClient, value); }
         public decimal Amount { get => _amount; set => SetProperty(ref _amount, value); }
-        public IAccount SelectedAccount { get => _selectedAccount; set => SetProperty(ref _selectedAccount, value); }
+        public IAccount<object> SelectedAccount { get => _selectedAccount; set => SetProperty(ref _selectedAccount, value); }
        
 
 
@@ -37,11 +37,7 @@ namespace Module_12_1.ViewModels
         private bool CanTopUp(object p) => true;
         private void ExecuteTopUp(object p)
         {
-            switch (SelectedAccount.Type)
-            {
-                case "Депозитный":SelectedAccount.TopUp<DepositAccount>(SelectedAccount, Amount); break;
-                case "Недепозитный": SelectedAccount.TopUp<NonDepositAccount>(Amount); break;
-            }
+            SelectedAccount.TopUp(Amount);
         }
     }
 }

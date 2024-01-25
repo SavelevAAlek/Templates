@@ -38,7 +38,7 @@
                       MinHeight="120">
 
 
-                <ListView ItemsSource="{Binding SelectedClient.Accounts}"
+                <ListView ItemsSource="{Binding SelectedClient.AccountsList}"
                                   SelectedItem="{Binding SelectedAccount}">
                     <ListView.View>
                         <GridView>
@@ -69,7 +69,7 @@
                 <StackPanel Orientation="Vertical">
 
                     <TextBlock Text="Выберите счёт:"/>
-                    <ComboBox ItemsSource="{Binding SelectedClient.Accounts}"
+                    <ComboBox ItemsSource="{Binding SelectedClient.AccountsList}"
                               SelectedItem="{Binding SelectedAccount}"/>
                     <TextBlock Text="Сумма пополнения:"/>
                     <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"/>

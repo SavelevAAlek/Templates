@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Module_12_1.Models
 {
-    public interface IAccount<out T>
+    public interface ITopUp
     {
-        T Type { get; }
-        decimal Amount { get; set; }
         void TopUp(decimal amount);
     }
-
-
 }

@@ -1,42 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Module_12_1.ViewModels;
+using System.Collections.Generic;
 
 namespace Module_12_1.Models
 {
-    public class Account<T> : IAccount<T>
+    public class Account<T> : ViewModelBase, IAccount<T>
     {
-        public T AccountType { get; set; }
-        public decimal Amount { get; set; }
-
-        public string Type
+        private decimal _amount;
+        public T Type { get; set; }
+        public decimal Amount { get => _amount; set => SetProperty(ref _amount, value); }
+        public Account(T type, decimal amount)
         {
-            get
-            {
-                switch (AccountType)
-                {
-                    case DepositAccount: return "Депозитный";
-                    case NonDepositAccount: return "Недепозитный";
-                    default: return "-";
-                }
-            }
-        }
-
-        public List<IAccount> Accounts { get; set; }
-
-
-        public Account(T accountType, decimal amount)
-        {
-            AccountType = accountType;
+            Type = type;
             Amount = amount;
         }
 
-        public void TopUp<K>(decimal amount)
+        public Account() { }
+        public void TopUp(decimal amount)
         {
             Amount += amount;
-        }
-
-        public void TopUp<K>(IAccount<K> account, decimal amount)
-        {
-            account.Amount += amount;
         }
     }
 }
